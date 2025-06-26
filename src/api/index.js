@@ -9,11 +9,11 @@ axiosInstance.interceptors.request.use(
   function (config) {
     try {
       config.headers["Content-Type"] = "application/json";
-      // const token = '338ec7eb45e1b41989a249918c365f1d4e1dace21fea35343222a2b5b7667f6fd8e0bc3f4c14d1eb4530ae23ed3ebcc8a5f1012851fd54d9be5644c238321d6fd6fdd7b6a1aca40496f0d58d3005a52dc671f09140256c3d9f32ba4bbaa9bdea4cf66508a9c0a4b0ba8f9bdf930df6267d114c8c97c4cc3bb8442fd7ca0629dc'
+      const token = '84ac8d3ff9eeccb28e22ffb1dad43fed206bdedbade6e9d1c7ff8e37f0b8498d90c0eeb665dfd0f030aaa8cf0f66d964b4d7dac9820986cf7e39b62cc6fd7e6a524078df938a1a2cead3394d87d68d087cc7de2cee2400821565f7d7775db36394f2a1d95ad5d3a65a7e8a1930d7566fba275fec2af486acd1f2644c6763751b'
 
-      // if (token) {
-      //   config.headers["authorization"] = `Bearer ${token}`;
-      // }
+      if (token) {
+        config.headers["authorization"] = `Bearer ${token}`;
+      }
       /*  if (config.data instanceof FormData) {
          config.headers["Content-Type"] = "multipart/form-data";
        } */
