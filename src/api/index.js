@@ -46,13 +46,48 @@ export const getAllTeamMembers = async () => {
 export const getAllBlogs = async () => {
   try {
     const res = await axiosInstance.get(
-      `/blogs?populate[blogContent][on][v1.paragraph][populate][heading][populate]=*&populate[blogContent][on][v1.paragraph][populate][content][populate]=*&populate[blogContent][on][v1.paragraph][populate][image][populate]=src&populate[blogContent][on][v1.content][populate]=*&populate[blogContent][on][v1.image][populate]=src&populate[blogContent][on][v1.code-block][populate]=*&populate[blogContent][on][v1.list][populate]=*&populate[blogContent][on][v1.main-heading-and-content][populate]=*`
+      `/blogs?populate[blogContent][on][v1.paragraph][populate][heading][populate]=*&populate[blogContent][on][v1.paragraph][populate][content][populate]=*&populate[blogContent][on][v1.paragraph][populate][image][populate]=src&populate[blogContent][on][v1.content][populate]=*&populate[blogContent][on][v1.image][populate]=src&populate[blogContent][on][v1.code-block][populate]=*&populate[blogContent][on][v1.logo-list-component][populate][logoList][populate]=*&populate[blogContent][on][v1.bulleted-list][populate][listContent][populate]=*&populate[blogContent][on][v1.main-heading-and-content][populate]=*`
     );
+      // `/blogs?populate[blogContent][on][v1.paragraph][populate][heading][populate]=*&populate[blogContent][on][v1.paragraph][populate][content][populate]=*&populate[blogContent][on][v1.paragraph][populate][image][populate]=src&populate[blogContent][on][v1.content][populate]=*&populate[blogContent][on][v1.image][populate]=src&populate[blogContent][on][v1.code-block][populate]=*&populate[blogContent][on][v1.list][populate]=*&populate[blogContent][on][v1.main-heading-and-content][populate]=*`
+      
+// `
+// /blogs?
+//   populate[blogContent][on][v1.paragraph][populate][heading][populate]=
+//   *&populate[blogContent][on][v1.paragraph][populate][content][populate]=
+//   *&populate[blogContent][on][v1.paragraph][populate][image][populate]=src
+//   &populate[blogContent][on][v1.content][populate]=
+//   *&populate[blogContent][on][v1.image][populate]=src
+//   &populate[blogContent][on][v1.code-block][populate]=
+//   *&populate[blogContent][on][v1.logo-list-component][populate][logoList][populate]=
+//   *&populate[blogContent][on][v1.bulleted-list][populate][listContent][populate]=
+//   *&populate[blogContent][on][v1.main-heading-and-content][populate]=*
+//   `
+
+
+
+
+  // *&populate[blogContent][on][v1.list][populate]=
+// );
     return res;
   } catch (e) {
     throw e;
   }
 };
+
+// `
+// /blogs?
+//   populate[blogContent][on][v1.paragraph][populate][heading][populate]=
+//   *&populate[blogContent][on][v1.paragraph][populate][content][populate]=
+//   *&populate[blogContent][on][v1.paragraph][populate][image][populate]=src
+//   &populate[blogContent][on][v1.content][populate]=
+//   *&populate[blogContent][on][v1.image][populate]=src
+//   &populate[blogContent][on][v1.code-block][populate]=
+//   *&populate[blogContent][on][v1.list][populate]=
+//   *&populate[blogContent][on][v1.logo-list-component][populate]=
+//   *&populate[blogContent][on][v1.main-heading-and-content][populate]=*
+// `
+
+
 
 
 // export const getAllBlogs = async () => {
