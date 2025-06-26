@@ -1,7 +1,37 @@
 import React from "react";
 import CodeBlock from "./CodeBlock";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getBlogById } from "../api";
+import '../App.css'
 
-const BlogContentRenderer = ({ blogContent = [] }) => {
+const BlogContentRenderer = () => {
+  const { id } = useParams();
+  const [blogContent, setBlogContent] = useState([]);
+
+  useEffect(() => {
+  const fetchBlog = async () => {
+    try {
+      const res = await getBlogById(id); 
+
+      if (res.status === 200 && res.data.data.length > 0) {
+        const blog = res.data.data[0];
+        setBlogContent(blog?.attributes?.blogContent || blog?.blogContent || []);
+        console.log("Loaded blog:", blog.title);
+      } else {
+        setBlogContent([]); // reset if no match
+      }
+    } catch (err) {
+      console.error("Fetch failed:", err);
+      setBlogContent([]);
+    }
+  };
+
+  fetchBlog();
+}, [id]);
+
+
+
   const renderComponent = (component, index) => {
     const {
       __component,
@@ -233,7 +263,7 @@ const BlogContentRenderer = ({ blogContent = [] }) => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white">
-      <div className="prose prose-lg max-w-none" style={{paddingInline: '200px'}}>
+      <div className="prose prose-lg max-w-none" style={{ paddingInline: '200px' }}>
         {blogContent.map((component, index) =>
           renderComponent(component, index)
         )}

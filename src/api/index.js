@@ -9,14 +9,14 @@ axiosInstance.interceptors.request.use(
   function (config) {
     try {
       config.headers["Content-Type"] = "application/json";
-      const token = '84ac8d3ff9eeccb28e22ffb1dad43fed206bdedbade6e9d1c7ff8e37f0b8498d90c0eeb665dfd0f030aaa8cf0f66d964b4d7dac9820986cf7e39b62cc6fd7e6a524078df938a1a2cead3394d87d68d087cc7de2cee2400821565f7d7775db36394f2a1d95ad5d3a65a7e8a1930d7566fba275fec2af486acd1f2644c6763751b'
+      const token = '695521dcf28d148e6460d64fcf1c261216ab637202eb1a1a67c919a5f08781e31aa453f8ac85fc8d468db5f91ebca5ceb515921fdcc085b161062b53232d46dec13115cfc63e7c4999bbbc57c9864bfc5a7cc176590c58a962519b91e529f0b3852d059ece8e4d144e458a80a912ccee532a756ec68a244123c5eeaa48b5f128'
 
       if (token) {
         config.headers["authorization"] = `Bearer ${token}`;
       }
-      /*  if (config.data instanceof FormData) {
+        if (config.data instanceof FormData) {
          config.headers["Content-Type"] = "multipart/form-data";
-       } */
+       } 
       if (config.data instanceof FormData) {
         config.headers["Content-Type"] = "multipart/form-data";
       } else {
@@ -43,13 +43,42 @@ export const getAllTeamMembers = async () => {
 };
 
 
-export const getAllBlogs = async () => {
+// export const getAllBlogs = async () => {
+//   try {
+//     const res = await axiosInstance.get(
+//       `/blogs?populate[blogContent][on][v1.paragraph][populate][heading][populate]=*&populate[blogContent][on][v1.paragraph][populate][content][populate]=*&populate[blogContent][on][v1.paragraph][populate][image][populate]=src&populate[blogContent][on][v1.content][populate]=*&populate[blogContent][on][v1.image][populate]=src&populate[blogContent][on][v1.code-block][populate]=*&populate[blogContent][on][v1.logo-list-component][populate][logoList][populate]=*&populate[blogContent][on][v1.bulleted-list][populate][listContent][populate]=*&populate[blogContent][on][v1.main-heading-and-content][populate]=*`
+//     );
+//     return res;
+//   } catch (e) {
+//     throw e;
+//   }
+// };
+
+export const getBlogById = async (id) => {
   try {
     const res = await axiosInstance.get(
-      `/blogs?populate[blogContent][on][v1.paragraph][populate][heading][populate]=*&populate[blogContent][on][v1.paragraph][populate][content][populate]=*&populate[blogContent][on][v1.paragraph][populate][image][populate]=src&populate[blogContent][on][v1.content][populate]=*&populate[blogContent][on][v1.image][populate]=src&populate[blogContent][on][v1.code-block][populate]=*&populate[blogContent][on][v1.logo-list-component][populate][logoList][populate]=*&populate[blogContent][on][v1.bulleted-list][populate][listContent][populate]=*&populate[blogContent][on][v1.main-heading-and-content][populate]=*`
+      // `/blogs?filters[id][$eq]=56&populate=*`
+      `/blogs?filters[id][$eq]=${id}&populate[blogContent][on][v1.paragraph][populate][heading][populate]=*&populate[blogContent][on][v1.paragraph][populate][content][populate]=*&populate[blogContent][on][v1.paragraph][populate][image][populate]=src&populate[blogContent][on][v1.content][populate]=*&populate[blogContent][on][v1.image][populate]=src&populate[blogContent][on][v1.code-block][populate]=*&populate[blogContent][on][v1.logo-list-component][populate][logoList][populate]=*&populate[blogContent][on][v1.bulleted-list][populate][listContent][populate]=*&populate[blogContent][on][v1.main-heading-and-content][populate]=*`
+    );  
+    return res;
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const getListOfAllBlogs = async () => {
+  try {
+    const res = await axiosInstance.get(
+      `/blogs?populate[thumbnail]=true&fields[0]=title&fields[1]=shortDescription&fields[2]=publishedAt`
     );
-      // `/blogs?populate[blogContent][on][v1.paragraph][populate][heading][populate]=*&populate[blogContent][on][v1.paragraph][populate][content][populate]=*&populate[blogContent][on][v1.paragraph][populate][image][populate]=src&populate[blogContent][on][v1.content][populate]=*&populate[blogContent][on][v1.image][populate]=src&populate[blogContent][on][v1.code-block][populate]=*&populate[blogContent][on][v1.list][populate]=*&populate[blogContent][on][v1.main-heading-and-content][populate]=*`
-      
+    return res;
+  } catch (e) {
+    throw e;
+  }
+};
+
+
+
 // `
 // /blogs?
 //   populate[blogContent][on][v1.paragraph][populate][heading][populate]=
@@ -65,37 +94,3 @@ export const getAllBlogs = async () => {
 
 
 
-
-  // *&populate[blogContent][on][v1.list][populate]=
-// );
-    return res;
-  } catch (e) {
-    throw e;
-  }
-};
-
-// `
-// /blogs?
-//   populate[blogContent][on][v1.paragraph][populate][heading][populate]=
-//   *&populate[blogContent][on][v1.paragraph][populate][content][populate]=
-//   *&populate[blogContent][on][v1.paragraph][populate][image][populate]=src
-//   &populate[blogContent][on][v1.content][populate]=
-//   *&populate[blogContent][on][v1.image][populate]=src
-//   &populate[blogContent][on][v1.code-block][populate]=
-//   *&populate[blogContent][on][v1.list][populate]=
-//   *&populate[blogContent][on][v1.logo-list-component][populate]=
-//   *&populate[blogContent][on][v1.main-heading-and-content][populate]=*
-// `
-
-
-
-
-// export const getAllBlogs = async () => {
-//   let result;
-//   try{
-//     result = await axiosInstance.get(`/blogs?populate=*`);
-//   } catch (e) {
-//     result = e;
-//   }
-//   return result;
-// }
