@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  gap: 20px;
+
+  .team-card {
+    display: flex;
+    flex-direction: column;
+
+    img {
+      height: 250px;
+      aspect-ratio: 1;
+    }
+
+    .name {
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .designation {
+      font-size: 20px;
+    }
+  }
+}
+
+h6 {
+  font-size: 16px;
+  margin: 0 0 10px 0;
+}

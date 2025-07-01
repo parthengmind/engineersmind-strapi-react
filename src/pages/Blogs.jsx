@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getListOfAllBlogs } from '../api';
-import './blogs.css';
+import './blogs.scss';                           
 import { Link } from "react-router-dom";
 
 

@@ -3,7 +3,7 @@ import CodeBlock from "./CodeBlock";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getBlogById } from "../api";
-import '../App.css'
+import '../App.scss'
 
 const BlogContentRenderer = () => {
   const { id } = useParams();
