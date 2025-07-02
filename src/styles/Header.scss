@@ -1,0 +1,137 @@
+// styles/Header.scss
+.header {
+  background-color: #000000;
+  border-bottom: 1px solid #1a1a1a;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid #f5cc52; // ✅ golden border
+  z-index: 1000;
+//   margin-bottom: 10px;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  &__logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    &-text {
+      color: #ffffff;
+    }
+
+    &-accent {
+      color: #ffffff;
+      margin-left: 0.2rem;
+    }
+  }
+
+  &__nav {
+    &--open {
+      display: block;
+    }
+
+    &-list {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+      align-items: center;
+
+      li a {
+        color: #cccccc;
+        font-weight: 400;
+        transition: color 0.3s ease;
+        position: relative;
+
+        &:hover {
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  &__mobile-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    gap: 4px;
+
+    span {
+      width: 25px;
+      height: 3px;
+      background: #ffffff;
+      transition: 0.3s;
+    }
+  }
+
+  @media (max-width: 768px) {
+    &__nav {
+      display: none;
+    }
+
+    &__mobile-toggle {
+      display: flex;
+    }
+  }
+}
+
+
+
+// .header {
+//   background: #000;
+//   color: #fff;
+//   border-bottom: 1px solid #f5cc52;
+
+//   .header-inner {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding: 1.5rem 5vw;
+
+//     .logo {
+//       font-size: 28px;
+//       font-weight: 400;
+//       line-height: 1.2;
+
+//       strong {
+//         font-weight: 700;
+//       }
+//     }
+
+//     .nav {
+//       display: flex;
+//       align-items: center;
+//       gap: 2rem;
+
+//       a {
+//         color: #fff;
+//         text-decoration: none;
+//         font-size: 16px;
+
+//         &:hover {
+//           color: #f5cc52;
+//         }
+//       }
+
+//       .menu-icon {
+//         display: flex;
+//         flex-direction: column;
+//         gap: 4px;
+//         cursor: pointer;
+
+//         span {
+//           height: 2px;
+//           width: 20px;
+//           background-color: #fff;
+//         }
+//       }
+//     }
+//   }
+// }

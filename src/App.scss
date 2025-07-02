@@ -1,28 +1,31 @@
-.container {
-  display: flex;
-  gap: 20px;
+// .app-wrapper {
+//   padding: 40px 0;
+//   background-color: #000;
+//   min-height: 100vh;
+//   color: #fff;
+// }
 
-  .team-card {
-    display: flex;
-    flex-direction: column;
+//   .team-card {
+//     display: flex;
+//     flex-direction: column;
 
-    img {
-      height: 250px;
-      aspect-ratio: 1;
-    }
+//     img {
+//       height: 250px;
+//       aspect-ratio: 1;
+//     }
 
-    .name {
-      font-size: 26px;
-      font-weight: 600;
-    }
+//     .name {
+//       font-size: 26px;
+//       font-weight: 600;
+//     }
 
-    .designation {
-      font-size: 20px;
-    }
-  }
-}
+//     .designation {
+//       font-size: 20px;
+//     }
+//   }
+// }
 
-h6 {
-  font-size: 16px;
-  margin: 0 0 10px 0;
-}
+// h6 {
+//   font-size: 16px;
+//   margin: 0 0 10px 0;
+// }

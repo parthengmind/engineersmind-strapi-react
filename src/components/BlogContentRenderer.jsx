@@ -1,36 +1,33 @@
-import React from "react";
-import CodeBlock from "./CodeBlock";
+// BlogContentRenderer.jsx
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import CodeBlock from "./CodeBlock";
 import { getBlogById } from "../api";
-import '../App.scss'
+import Header from "./Header";
+import "../styles/BlogContent.scss";
+import Footer from "./Footer";
 
 const BlogContentRenderer = () => {
   const { id } = useParams();
   const [blogContent, setBlogContent] = useState([]);
 
   useEffect(() => {
-  const fetchBlog = async () => {
-    try {
-      const res = await getBlogById(id); 
-
-      if (res.status === 200 && res.data.data.length > 0) {
-        const blog = res.data.data[0];
-        setBlogContent(blog?.attributes?.blogContent || blog?.blogContent || []);
-        console.log("Loaded blog:", blog.title);
-      } else {
-        setBlogContent([]); // reset if no match
+    const fetchBlog = async () => {
+      try {
+        const res = await getBlogById(id);
+        if (res.status === 200 && res.data.data.length > 0) {
+          const blog = res.data.data[0];
+          setBlogContent(blog?.attributes?.blogContent || blog?.blogContent || []);
+        } else {
+          setBlogContent([]);
+        }
+      } catch (err) {
+        console.error("Fetch failed:", err);
+        setBlogContent([]);
       }
-    } catch (err) {
-      console.error("Fetch failed:", err);
-      setBlogContent([]);
-    }
-  };
-
-  fetchBlog();
-}, [id]);
-
-
+    };
+    fetchBlog();
+  }, [id]);
 
   const renderComponent = (component, index) => {
     const {
@@ -45,150 +42,59 @@ const BlogContentRenderer = () => {
 
     switch (__component) {
       case "v1.paragraph": {
-        const headingText = component.heading?.heading;
-        const HeadingTag = component.heading?.headingType || "h3";
-        const contentText = component.content?.content;
+        const headingText = heading?.heading;
+        const HeadingTag = heading?.headingType || "h3";
+        const contentText = content?.content;
         const imageUrl = component.image?.src?.url
           ? `${import.meta.env.VITE_API_URL}${component.image.src.url}`
           : null;
         const imageAlt = component.image?.alt || "Image";
 
         return (
-          <div
-            key={index}
-            className="my-8 p-6 bg-gray-50 border rounded-lg shadow-sm"
-          >
-            {headingText && (
-              <HeadingTag className="text-xl font-semibold text-gray-800 mb-3">
-                {headingText}
-              </HeadingTag>
-            )}
-
-            {contentText && (
-              <p className="text-gray-700 leading-relaxed mb-4 whitespace-pre-line">
-                {contentText}
-              </p>
-            )}
-
+          <section key={index} className="blog-section">
+            {headingText && <HeadingTag className="blog-heading">{headingText}</HeadingTag>}
+            {contentText && <p className="blog-paragraph">{contentText}</p>}
             {imageUrl && (
-              <>
-                <img
-                  src={imageUrl}
-                  alt={imageAlt}
-                  style={{
-                    maxWidth: "100%",
-                    maxHeight: "500px",
-                    display: "block",
-                    margin: "20px auto",
-                    objectFit: "contain",
-                    borderRadius: "12px",
-                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-                  }}
-                  className="max-w-full max-h-[400px] mx-auto rounded-lg shadow-md object-contain"
-                  onError={(e) => {
-                    e.target.style.display = "none";
-                    const fallback = e.target.nextElementSibling;
-                    if (fallback) fallback.style.display = "block";
-                  }}
-                />
-                <div
-                  style={{ display: "none" }}
-                  className="text-center text-red-500 text-sm mt-2"
-                >
-                  Failed to load image: {imageAlt}
-                </div>
-              </>
+              <img
+                src={imageUrl}
+                alt={imageAlt}
+                className="blog-image"
+                onError={(e) => (e.target.style.display = "none")}
+              />
             )}
-          </div>
+          </section>
         );
       }
 
       case "v1.main-heading-and-content": {
         const HeadingTag = headingType || "h3";
-        return (
-          <HeadingTag key={index} className="font-bold text-gray-800 mt-6 mb-3">
-            {heading}
-          </HeadingTag>
-        );
+        return <HeadingTag key={index} className="blog-heading">{heading}</HeadingTag>;
       }
 
       case "v1.content":
         return (
-          <div key={index} className="mb-4">
-            {content && (
-              <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-                {content}
-              </p>
-            )}
+          <div key={index} className="blog-content">
+            {content && <p className="blog-paragraph">{content}</p>}
             {linkableContent && (
-              <div className="text-blue-600 hover:text-blue-800">
-                <a href="#" className="underline">
-                  {linkableContent.replace(/\[([^\]]+)\]\(link\)/g, "$1")}
-                </a>
-              </div>
+              <a href="#" className="blog-link">{linkableContent.replace(/\[([^\]]+)\]\(link\)/g, "$1")}</a>
             )}
           </div>
         );
 
       case "v1.image": {
-        const imageAlt = alt || "Blog image";
         const imageUrl = component?.src?.url
           ? `${import.meta.env.VITE_API_URL}${component.src.url}`
           : null;
-
         return (
-          <div key={index} className="my-6">
-            {imageUrl ? (
-              <>
-                <img
-                  src={imageUrl}
-                  alt={imageAlt}
-                  style={{
-                    maxWidth: "100%",
-                    maxHeight: "500px",
-                    display: "block",
-                    margin: "20px auto",
-                    objectFit: "contain",
-                    borderRadius: "12px",
-                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-                  }}
-                  onError={(e) => {
-                    e.target.style.display = "none";
-                    const errorDiv = e.target.nextElementSibling;
-                    if (errorDiv) errorDiv.style.display = "block";
-                  }}
-                />
-                <div
-                  style={{ display: "none" }}
-                  className="p-4 bg-red-50 border border-red-200 rounded-lg"
-                >
-                  <p className="text-center text-red-600">
-                    Failed to load image: {imageAlt}
-                  </p>
-                  <p className="text-center text-xs text-red-400 mt-1">
-                    URL: {imageUrl}
-                  </p>
-                </div>
-              </>
-            ) : (
-              <div className="my-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                <p className="text-center text-gray-500">Image: {imageAlt}</p>
-                <p className="text-center text-xs text-yellow-500 mt-1">
-                  Image URL not available
-                </p>
-              </div>
-            )}
+          <div key={index} className="blog-section">
+            {imageUrl && <img src={imageUrl} alt={alt || "Image"} className="blog-image" />}
           </div>
         );
       }
 
       case "v1.code-block":
-        console.log(codeBlock)
         return (
-          <div key={index} className="my-4">
-            {/* <pre className="bg-gray-900 text-green-300 p-4 rounded-lg overflow-x-auto">
-              <code>{codeBlock}</code>
-            </pre> */}
+          <div key={index} className="blog-code">
             <CodeBlock code={codeBlock.toString()} language="javascript" />
           </div>
         );
@@ -196,11 +102,9 @@ const BlogContentRenderer = () => {
       case "v1.bulleted-list": {
         const items = component.listContent || [];
         return (
-          <ul key={index} className="list-disc list-inside mb-4 ml-4">
+          <ul key={index} className="blog-list">
             {items.map((item, i) => (
-              <li key={i} className="text-gray-700 mb-1">
-                {item?.content}
-              </li>
+              <li key={i}>{item?.content}</li>
             ))}
           </ul>
         );
@@ -208,46 +112,17 @@ const BlogContentRenderer = () => {
 
       case "v1.logo-list-component": {
         const items = component.logoList || [];
-
         return (
-          <div
-            key={index}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6 my-6"
-          >
+          <div key={index} className="blog-logo-list">
             {items.map((item, i) => {
-              const headingText = item.listHeading?.heading || "";
               const HeadingTag = item.listHeading?.headingType || "h4";
-
               return (
-                <div
-                  key={i}
-                  className="p-4 border rounded-lg shadow-sm bg-gray-50"
-                >
-                  {headingText && (
-                    <HeadingTag className="text-gray-800 font-semibold mb-2">
-                      {headingText}
-                    </HeadingTag>
-                  )}
-
+                <div key={i} className="logo-item">
+                  <HeadingTag className="blog-heading">{item.listHeading?.heading}</HeadingTag>
                   {item.listContent?.map((contentItem, j) => (
-                    <div key={j} className="text-gray-700 mb-2">
-                      {contentItem.content && (
-                        <p className="whitespace-pre-line">
-                          {contentItem.content}
-                        </p>
-                      )}
-                      {contentItem.linkableContent && (
-                        <span
-                          className="text-blue-600 underline hover:text-blue-800"
-                          dangerouslySetInnerHTML={{
-                            __html: contentItem.linkableContent.replace(
-                              /\[([^\]]+)\]\(([^)]+)\)/g,
-                              '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
-                            ),
-                          }}
-                        />
-                      )}
-                    </div>
+                    <p key={j} className="blog-paragraph">
+                      {contentItem.content}
+                    </p>
                   ))}
                 </div>
               );
@@ -262,12 +137,12 @@ const BlogContentRenderer = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white">
-      <div className="prose prose-lg max-w-none" style={{ paddingInline: '200px' }}>
-        {blogContent.map((component, index) =>
-          renderComponent(component, index)
-        )}
+    <div className="blog-wrapper">
+      <Header />
+      <div className="blog-container">
+        {blogContent.map((component, index) => renderComponent(component, index))}
       </div>
+       <Footer />
     </div>
   );
 };
