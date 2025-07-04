@@ -41,59 +41,65 @@ const BlogContentRenderer = () => {
 
     switch (__component) {
       case "v1.paragraph": {
-  const headingText = heading?.heading;
-  const HeadingTag = heading?.headingType || "h3";
-  const contentText = content?.content;
-  const imageUrl = component.image?.src?.url
-    ? `${import.meta.env.VITE_API_URL}${component.image.src.url}`
-    : null;
-  const imageAlt = component.image?.alt || "Image";
-  const layoutType = component.layoutType || "none";
+        const headingText = heading?.heading;
+        const HeadingTag = heading?.headingType || "h3";
+        const contentText = content?.content;
 
-  if (layoutType === "contentLeftImageRight" || layoutType === "contentRightImageLeft") {
-    const isReversed = layoutType === "contentRightImageLeft";
+        const imageUrl = component.image?.src?.url
+          ? `https://emstrapi-website.engineersmind.dev${component.image.src.url}`
+          : null;
 
-    return (
-      <section
-        key={index}
-        className={`blog-section side-by-side ${isReversed ? "reverse" : ""}`}
-      >
-        <div className="text-block">
-          {headingText && (
-            <HeadingTag className="blog-heading">{headingText}</HeadingTag>
-          )}
-          {contentText && <p className="blog-paragraph">{contentText}</p>}
-        </div>
-        {imageUrl && (
-          <div className="image-block">
-            <img
-              src={imageUrl}
-              alt={imageAlt}
-              className="blog-image"
-              onError={(e) => (e.target.style.display = "none")}
-            />
-          </div>
-        )}
-      </section>
-    );
-  }
+        // const imageUrl = component.image?.src?.url
+        //     ? `${import.meta.env.VITE_API_URL}${component.image.src.url}`
+        //     : null;
 
-  // Default layout
-  return (
-    <section key={index} className="blog-section">
-      {headingText && <HeadingTag className="blog-heading">{headingText}</HeadingTag>}
-      {contentText && <p className="blog-paragraph">{contentText}</p>}
-      {imageUrl && (
-        <img
-          src={imageUrl}
-          alt={imageAlt}
-          className="blog-image"
-          onError={(e) => (e.target.style.display = "none")}
-        />
-      )}
-    </section>
-  );
-}
+        const imageAlt = component.image?.alt || "Image";
+        const layoutType = component.layoutType || "none";
+
+        if (layoutType === "contentLeftImageRight" || layoutType === "contentRightImageLeft") {
+          const isReversed = layoutType === "contentRightImageLeft";
+
+          return (
+            <section
+              key={index}
+              className={`blog-section side-by-side ${isReversed ? "reverse" : ""}`}
+            >
+              <div className="text-block">
+                {headingText && (
+                  <HeadingTag className="blog-heading">{headingText}</HeadingTag>
+                )}
+                {contentText && <p className="blog-paragraph">{contentText}</p>}
+              </div>
+              {imageUrl && (
+                <div className="image-block">
+                  <img
+                    src={imageUrl}
+                    alt={imageAlt}
+                    className="blog-image"
+                    onError={(e) => (e.target.style.display = "none")}
+                  />
+                </div>
+              )}
+            </section>
+          );
+        }
+
+        // Default layout
+        return (
+          <section key={index} className="blog-section">
+            {headingText && <HeadingTag className="blog-heading">{headingText}</HeadingTag>}
+            {contentText && <p className="blog-paragraph">{contentText}</p>}
+            {imageUrl && (
+              <img
+                src={imageUrl}
+                alt={imageAlt}
+                className="blog-image"
+                onError={(e) => (e.target.style.display = "none")}
+              />
+            )}
+          </section>
+        );
+      }
 
 
       case "v1.main-heading-and-content": {
@@ -113,8 +119,11 @@ const BlogContentRenderer = () => {
 
       case "v1.image": {
         const imageUrl = component?.src?.url
-          ? `${import.meta.env.VITE_API_URL}${component.src.url}`
+          ? `https://emstrapi-website.engineersmind.dev${component.src.url}`
           : null;
+        // const imageUrl = component?.src?.url
+        //   ? `${import.meta.env.VITE_API_URL}${component.src.url}`
+        //   : null;
         return (
           <div key={index} className="blog-section">
             {imageUrl && <img src={imageUrl} alt={alt || "Image"} className="blog-image" />}
@@ -172,7 +181,7 @@ const BlogContentRenderer = () => {
       <div className="blog-container">
         {blogContent.map((component, index) => renderComponent(component, index))}
       </div>
-       <Footer />
+      <Footer />
     </div>
   );
 };
