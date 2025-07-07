@@ -1,33 +1,39 @@
-// styles/Header.scss
 .header {
-  background-color: #000000;
-  border-bottom: 1px solid #1a1a1a;
+  background-color: #000;
   position: sticky;
   top: 0;
-  border-bottom: 1px solid #f5cc52; // ✅ golden border
   z-index: 1000;
-//   margin-bottom: 10px;
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(to right, #f5cc52, #78e3e1);
+  border-image-slice: 1;
 
   &__container {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 1rem 2rem;
+    align-items: center;
+    padding: 1.2rem 5vw;
     max-width: 1400px;
     margin: 0 auto;
   }
 
   &__logo {
-    font-size: 1.5rem;
-    font-weight: 600;
+    line-height: 1;
+    font-size: 28px;
+    font-weight: 400;
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
 
     &-text {
+      font-weight: 300;
       color: #ffffff;
     }
 
     &-accent {
+      font-weight: 700;
       color: #ffffff;
-      margin-left: 0.2rem;
     }
   }
 
@@ -38,15 +44,17 @@
 
     &-list {
       display: flex;
-      list-style: none;
       gap: 2.5rem;
+      list-style: none;
       align-items: center;
+      margin: 0;
+      padding: 0;
 
       li a {
-        color: #cccccc;
-        font-weight: 400;
-        transition: color 0.3s ease;
-        position: relative;
+        color: #d0d0d0;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s;
 
         &:hover {
           color: #ffffff;
@@ -64,13 +72,13 @@
     gap: 4px;
 
     span {
-      width: 25px;
-      height: 3px;
-      background: #ffffff;
-      transition: 0.3s;
+      height: 2px;
+      width: 20px;
+      background-color: #fff;
     }
   }
 
+  // Responsive
   @media (max-width: 768px) {
     &__nav {
       display: none;
@@ -79,59 +87,13 @@
     &__mobile-toggle {
       display: flex;
     }
+
+    &__container {
+      flex-direction: row;
+    }
+
+    &__logo {
+      font-size: 22px;
+    }
   }
 }
-
-
-
-// .header {
-//   background: #000;
-//   color: #fff;
-//   border-bottom: 1px solid #f5cc52;
-
-//   .header-inner {
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     padding: 1.5rem 5vw;
-
-//     .logo {
-//       font-size: 28px;
-//       font-weight: 400;
-//       line-height: 1.2;
-
-//       strong {
-//         font-weight: 700;
-//       }
-//     }
-
-//     .nav {
-//       display: flex;
-//       align-items: center;
-//       gap: 2rem;
-
-//       a {
-//         color: #fff;
-//         text-decoration: none;
-//         font-size: 16px;
-
-//         &:hover {
-//           color: #f5cc52;
-//         }
-//       }
-
-//       .menu-icon {
-//         display: flex;
-//         flex-direction: column;
-//         gap: 4px;
-//         cursor: pointer;
-
-//         span {
-//           height: 2px;
-//           width: 20px;
-//           background-color: #fff;
-//         }
-//       }
-//     }
-//   }
-// }

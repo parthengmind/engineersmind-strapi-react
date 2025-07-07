@@ -1,34 +1,3 @@
-// import React from "react";
-// import "./../styles/Header.scss";
-
-// const Header = () => {
-//   return (
-//     <header className="header">
-//       <div className="header-inner">
-//         <div className="logo">
-//           engineers<br />
-//           <strong>mind</strong>
-//         </div>
-//         <nav className="nav">
-//           <a href="#">Industries</a>
-//           <a href="#">Services</a>
-//           <a href="#">Technologies</a>
-//           <a href="#">Contact</a>
-//           <div className="menu-icon">
-//             <span></span>
-//             <span></span>
-//           </div>
-//         </nav>
-//       </div>
-//     </header>
-//   );
-// };
-
-// export default Header;
-
-
-
-// components/Header.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Header.scss';
@@ -45,11 +14,11 @@ const Header = () => {
       <div className="header__container">
         <div className="header__logo">
           <Link to="/">
-            <span className="header__logo-text">engineers</span>
-            <span className="header__logo-accent">mind</span>
+            <div className="header__logo-text">engineers</div>
+            <div className="header__logo-accent">mind</div>
           </Link>
         </div>
-        
+
         <nav className={`header__nav ${isMobileMenuOpen ? 'header__nav--open' : ''}`}>
           <ul className="header__nav-list">
             <li><a href="#industries">Industries</a></li>
@@ -59,12 +28,11 @@ const Header = () => {
           </ul>
         </nav>
 
-        <button 
+        <button
           className="header__mobile-toggle"
           onClick={toggleMobileMenu}
           aria-label="Toggle mobile menu"
         >
-          <span></span>
           <span></span>
           <span></span>
         </button>
