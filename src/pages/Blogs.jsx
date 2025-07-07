@@ -50,7 +50,7 @@ const Blogs = () => {
             <div className="error">{error}</div>
           ) : (
             <div className="blog-grid">
-              {listOfAllBlog.map((blog) => (
+              {listOfAllBlog?.map((blog) => (
                 <BlogCard key={blog.id} blog={blog} />
               ))}
             </div>
