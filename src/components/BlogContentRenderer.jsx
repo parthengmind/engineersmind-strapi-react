@@ -45,8 +45,8 @@ const BlogContentRenderer = () => {
         const HeadingTag = heading?.headingType || "h3";
         const contentText = content?.content;
         const imageUrl = component.image?.src?.url
-          ? `${import.meta.env.VITE_API_URL}${component.image.src.url}`
-          // ? `https://emstrapi-website.engineersmind.dev${component.image.src.url}`
+          // ? `${import.meta.env.VITE_API_URL}${component.image.src.url}`
+          ? `https://emstrapi-website.engineersmind.dev${component.image.src.url}`
           : null;
         const imageAlt = component.image?.alt || "Image";
 
@@ -115,8 +115,8 @@ const BlogContentRenderer = () => {
 
       case "v1.image": {
         const imageUrl = component?.src?.url
-          ? `${import.meta.env.VITE_API_URL}${component.src.url}`
-          // ? `https://emstrapi-website.engineersmind.dev${component.src.url}`
+          // ? `${import.meta.env.VITE_API_URL}${component.src.url}`
+          ? `https://emstrapi-website.engineersmind.dev${component.src.url}`
           : null;
         // const imageUrl = component?.src?.url
         //   ? `${import.meta.env.VITE_API_URL}${component.src.url}`

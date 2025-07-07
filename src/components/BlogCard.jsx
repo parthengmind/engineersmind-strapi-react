@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import '../styles/Blogs.scss';
 
 const BlogCard = ({ blog }) => {
-  const imageUrl = blog?.thumbnail?.formats?.small?.url
-    ? `http://localhost:1337${blog.thumbnail.formats.small.url}`
-    : "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=250&fit=crop&crop=center";
+const imageUrl = blog?.thumbnail?.formats?.small?.url
+  ? `https://emstrapi-website.engineersmind.dev${blog.thumbnail.formats.small.url}`
+  : null;
 
   return (
     <Link to={`/blogs/${blog.id}`} className="blog-card">
