@@ -1,0 +1,82 @@
+.hero-section {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-color: #041023;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 4rem 5vw; // Match header spacing
+
+    .hero-overlay {
+        width: 100%;
+        max-width: 1400px;
+        display: flex;
+        margin: 0 auto;
+        padding-left: 80px;
+        flex-direction: column;
+
+        @media (max-width: 768px) {
+            padding: 2rem 1.5rem;
+            max-width: 100%;
+        }
+
+        .hero-breadcrumb {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-bottom: 4rem;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            padding-top: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.3;
+            background: linear-gradient(
+                    90deg,
+                    #f8ec8a,
+                    #f6ee8c,
+                    #89e5b2,
+                    #42e4cf,
+                   
+                );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+
+            @media (max-width: 768px) {
+                font-size: 2rem;
+            }
+        }
+
+        .contact-button {
+            padding: 0.7rem 1.4rem;
+            background-color: transparent;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            border-radius: 4px;
+            text-decoration: none;
+            width: fit-content;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: linear-gradient(180deg, #f6ee8c, #42e4cf);
+                color: #000;
+            }
+        }
+    }
+}

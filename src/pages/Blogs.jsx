@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import BlogCard from '../components/BlogCard';
 import '../styles/Blogs.scss';
 import Footer from '../components/Footer';
+import HeroSection from '../components/HeroSection';
 
 const Blogs = () => {
   const [listOfAllBlog, setListOfAllBlog] = useState([]);
