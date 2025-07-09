@@ -4,8 +4,8 @@ import '../styles/Blogs.scss';
 
 const BlogCard = ({ blog }) => {
 const imageUrl = blog?.thumbnail?.formats?.small?.url
-  ? `${import.meta.env.VITE_API_URL}${blog.thumbnail.formats.small.url}`
-  // ? `https://emstrapi-website.engineersmind.dev${blog.thumbnail.formats.small.url}`
+  // ? `${import.meta.env.VITE_API_URL}${blog.thumbnail.formats.small.url}`
+  ? `https://emstrapi-website.engineersmind.dev${blog.thumbnail.formats.small.url}`
   : null;
   return (
     <Link to={`/blogs/${blog.id}`} className="blog-card">

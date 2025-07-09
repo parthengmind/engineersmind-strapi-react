@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL}/api`,
-  // baseURL: `https://emstrapi-website.engineersmind.dev/api`,
+  // baseURL: `${import.meta.env.VITE_API_URL}/api`,
+  baseURL: `https://emstrapi-website.engineersmind.dev/api`,
 });
 
 
@@ -13,9 +13,9 @@ axiosInstance.interceptors.request.use(
       // token from env --------------------------------------
       // const token = import.meta.env.VITE_ACCESS_TOKEN
       // live cms token --------------------------------------
-      // const token = 'f0cf468dd0c2d15cd794fd63c296b28b81dfddb9e43b9d007ce90bc00fd58423188f0d349aa38b95cd0b86740a5197b034c6e787152caac72619a62a589b6c14f6a7cb800e8fee6dfeb2babcdd7898c5be7bb4955dca48dd5cad7f479963f954f5d6caea740f1d39965502fe6292fc9ac008870e9e5237fd42b129cc592224e4'
+      const token = 'd6353d42ea1a72bf7d76bd75c7d66b98dd710421691a93085b87cbda741fcf75b9e2e8e89d744ea21f550c9b1dc97cdd30ae80a2b11f47371e4c3bd5c0e023e7ad72956978accd1882e3dac11575629611aa3e140352d96f43524496b11789dca588599ee077fb67575a1a15c3842a2b100c4ae5d2d3aeeae763db668dedd067'
       // local cms token --------------------------------------
-      const token = '695521dcf28d148e6460d64fcf1c261216ab637202eb1a1a67c919a5f08781e31aa453f8ac85fc8d468db5f91ebca5ceb515921fdcc085b161062b53232d46dec13115cfc63e7c4999bbbc57c9864bfc5a7cc176590c58a962519b91e529f0b3852d059ece8e4d144e458a80a912ccee532a756ec68a244123c5eeaa48b5f128'
+      // const token = '695521dcf28d148e6460d64fcf1c261216ab637202eb1a1a67c919a5f08781e31aa453f8ac85fc8d468db5f91ebca5ceb515921fdcc085b161062b53232d46dec13115cfc63e7c4999bbbc57c9864bfc5a7cc176590c58a962519b91e529f0b3852d059ece8e4d144e458a80a912ccee532a756ec68a244123c5eeaa48b5f128'
 
       if (token) {
         config.headers["authorization"] = `Bearer ${token}`;

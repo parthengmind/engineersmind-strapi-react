@@ -12,6 +12,9 @@ const BlogContentRenderer = () => {
   const [blogContent, setBlogContent] = useState([]);
   const [blogMeta, setBlogMeta] = useState({ autherName: "", minutesToRead: "" });
 
+  // const API_BASE_URL = import.meta.env.VITE_API_URL;
+  const API_BASE_URL = "https://emstrapi-website.engineersmind.dev";
+
   useEffect(() => {
     const fetchBlog = async () => {
       try {
@@ -22,9 +25,9 @@ const BlogContentRenderer = () => {
           const blog = res.data.data[0];
 
           const heroImage = blog?.heroImage?.formats?.large?.url
-            ? `${import.meta.env.VITE_API_URL}${blog.heroImage.formats.large.url}`
+            ? `${API_BASE_URL}${blog.heroImage.formats.large.url}`
             : blog?.heroImage?.url
-              ? `${import.meta.env.VITE_API_URL}${blog.heroImage.url}`
+              ? `${API_BASE_URL}${blog.heroImage.url}`
               : null;
 
           const title = blog?.title || "Blog Title";
@@ -64,7 +67,7 @@ const BlogContentRenderer = () => {
         const HeadingTag = heading?.headingType || "h3";
         const contentText = content?.content;
         const imageUrl = component.image?.src?.url
-          ? `${import.meta.env.VITE_API_URL}${component.image.src.url}`
+          ? `${API_BASE_URL}${component.image.src.url}`
           : null;
         const imageAlt = component.image?.alt || "Image";
         const layoutType = component.layoutType || "none";
@@ -131,7 +134,7 @@ const BlogContentRenderer = () => {
 
       case "v1.image": {
         const imageUrl = component?.src?.url
-          ? `${import.meta.env.VITE_API_URL}${component.src.url}`
+          ? `${API_BASE_URL}${component.src.url}`
           : null;
         return (
           <div key={index} className="blog-section">
